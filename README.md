@@ -1,46 +1,40 @@
-# Astro Starter Kit: Basics
+# Cold Email Checker
 
-```sh
-npm create astro@latest -- --template basics
-```
+Free tool to scan cold emails for spam trigger words before you hit send.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Live: https://coldemailchecker.com
 
-## 🚀 Project Structure
+---
 
-Inside of your Astro project, you'll see the following folders and files:
+## What It Does
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
-```
+Paste your subject line and email body. The tool instantly highlights spam 
+trigger words, scores your email from 0–100, and suggests safer replacements 
+— all in real time, no signup needed.
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+- Detects 80+ spam trigger words across 5 categories: urgency, financial, 
+  manipulative, overpromise, and shady language
+- Subject lines scored at 2x severity since spam filters weigh them more heavily
+- Deliverability score from 0–100 based on word density, severity, and placement
+- Every flagged word comes with a suggested replacement
+- Runs entirely in the browser — nothing is sent to a server
 
-## 🧞 Commands
+## Tech Stack
 
-All commands are run from the root of the project, from a terminal:
+- Astro 6.4.4
+- JavaScript
+- Cloudflare Pages
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+## Run Locally
 
-## 👀 Want to learn more?
+git clone https://github.com/dhwani2412/coldemailchecker.git
+cd coldemailchecker
+npm install
+npm run dev
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Open http://localhost:4321
+
+## Built By
+
+Dhwani Kaushik — Growth & Outbound Marketer
+GitHub: https://github.com/dhwani2412
