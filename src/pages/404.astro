@@ -1,0 +1,18 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<Layout title="404 — Page Not Found | Cold Email Checker" description="The page you're looking for doesn't exist.">
+  <Navbar />
+  <main class="flex flex-col items-center justify-center min-h-[60vh] px-4 text-center">
+    <p class="text-6xl font-semibold text-color-ink">404</p>
+    <h1 class="mt-4 text-2xl font-medium text-color-ink">Page not found</h1>
+    <p class="mt-2 text-color-body">The page you're looking for doesn't exist or has been moved.</p>
+    <a href="/" class="mt-6 inline-block rounded-md bg-color-primary px-5 py-2.5 text-sm font-medium text-color-on-primary transition hover:opacity-80">
+      Go back home
+    </a>
+  </main>
+  <Footer />
+</Layout>

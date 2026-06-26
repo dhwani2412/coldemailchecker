@@ -1,0 +1,50 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<Layout
+  title="Contact Us — Cold Email Checker"
+  description="Get in touch with the Cold Email Checker team. We'd love to hear your feedback, suggestions, or questions."
+  keywords="contact cold email checker, email spam checker support, contact us"
+>
+  <Navbar />
+  <main class="mx-auto max-w-2xl px-6 py-16">
+    <h1 class="text-3xl font-semibold text-ink">Contact Us</h1>
+    <p class="mt-4 text-body">Have questions, feedback, or suggestions? Send us a message and we'll get back to you within 24–48 hours.</p>
+
+    <form class="mt-10 space-y-6 rounded-lg border border-hairline bg-canvas-soft-2 p-8">
+      <div>
+        <label for="name" class="block text-sm font-medium text-ink">Name</label>
+        <input type="text" id="name" name="name" required class="mt-1 w-full rounded-md border border-hairline bg-canvas px-4 py-2.5 text-sm text-ink placeholder:text-mute focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary" placeholder="Your name" />
+      </div>
+
+      <div>
+        <label for="email" class="block text-sm font-medium text-ink">Email</label>
+        <input type="email" id="email" name="email" required class="mt-1 w-full rounded-md border border-hairline bg-canvas px-4 py-2.5 text-sm text-ink placeholder:text-mute focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary" placeholder="you@example.com" />
+      </div>
+
+      <div>
+        <label for="subject" class="block text-sm font-medium text-ink">Subject</label>
+        <select id="subject" name="subject" required class="mt-1 w-full rounded-md border border-hairline bg-canvas px-4 py-2.5 text-sm text-ink focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary">
+          <option value="" disabled selected>Select a subject</option>
+          <option value="feedback">Feedback</option>
+          <option value="bug">Bug Report</option>
+          <option value="feature">Feature Request</option>
+          <option value="general">General Inquiry</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="message" class="block text-sm font-medium text-ink">Message</label>
+        <textarea id="message" name="message" rows="5" required class="mt-1 w-full rounded-md border border-hairline bg-canvas px-4 py-2.5 text-sm text-ink placeholder:text-mute focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary" placeholder="Your message..."></textarea>
+      </div>
+
+      <button type="submit" class="inline-flex h-11 items-center rounded-[100px] bg-primary px-6 text-sm font-medium text-on-primary transition-opacity hover:opacity-90">
+        Send Message
+      </button>
+    </form>
+  </main>
+  <Footer />
+</Layout>

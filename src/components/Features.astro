@@ -1,0 +1,58 @@
+---
+const features = [
+  {
+    icon: `<svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M9.663 17h4.674M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+    title: "Real-time detection.",
+    body: "Spam words are highlighted instantly as you type. No need to click scan — results appear live.",
+  },
+  {
+    icon: `<svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 8.25V6zm10.5 0A2.25 2.25 0 0116.5 3.75h2.25A2.25 2.25 0 0121 6v2.25a2.25 2.25 0 01-2.25 2.25H16.5a2.25 2.25 0 01-2.25-2.25V6zm-10.5 10.5A2.25 2.25 0 016 14.25h2.25a2.25 2.25 0 012.25 2.25v2.25A2.25 2.25 0 018.25 21H6a2.25 2.25 0 01-2.25-2.25v-2.25zm10.5 0a2.25 2.25 0 012.25-2.25h2.25A2.25 2.25 0 0121 16.5v2.25A2.25 2.25 0 0118.75 21H16.5a2.25 2.25 0 01-2.25-2.25v-2.25z" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+    title: "Categorized warnings.",
+    body: "Words are grouped into urgency, financial, manipulative, overpromise, and shady categories with severity levels.",
+  },
+  {
+    icon: `<svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zm6.75-4.5c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zm6.75-5.25c0-.621.504-1.125 1.125-1.125h2.25C20.496 2.25 21 2.754 21 3.375v16.5c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V3.375z" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+    title: "Deliverability score.",
+    body: "Get a weighted 0–100 score based on spam density, severity, and placement in subject vs body.",
+  },
+  {
+    icon: `<svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+    title: "Smart suggestions.",
+    body: "Every flagged word comes with a safer alternative. Replace risky phrases without losing your message.",
+  },
+  {
+    icon: `<svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+    title: "Subject line analysis.",
+    body: "Subject lines weigh heavier with spam filters. We analyze them separately with increased severity scoring.",
+  },
+  {
+    icon: `<svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+    title: "100% free. No signup.",
+    body: "No accounts, no paywalls, no upsells. Just paste your email and get results instantly.",
+  },
+];
+---
+
+<section id="features" class="bg-canvas py-24">
+  <div class="mx-auto max-w-[1400px] px-6">
+    <div class="text-center">
+      <span class="font-mono text-xs uppercase tracking-wide text-mute">Features</span>
+      <h2 class="mt-3 text-3xl font-semibold tracking-[-1.28px] text-ink md:text-4xl">
+        Built to beat spam filters.
+      </h2>
+      <p class="mt-3 text-base text-body">
+        Everything you need to ensure your cold emails reach the inbox.
+      </p>
+    </div>
+
+    <div class="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {features.map((f) => (
+        <div class="rounded-[8px] border border-hairline bg-canvas p-6 shadow-[0px_2px_2px_#0000000a,0px_8px_8px_-8px_#0000000a,inset_0_0_0_1px_#00000014] transition-shadow hover:shadow-[0px_2px_2px_#0000000a,0px_8px_16px_-4px_#0000000a,inset_0_0_0_1px_#00000014]">
+          <div class="text-body" set:html={f.icon} />
+          <h3 class="mt-4 text-base font-semibold tracking-tight text-ink">{f.title}</h3>
+          <p class="mt-2 text-sm leading-relaxed text-body">{f.body}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,57 @@
+---
+---
+
+<nav class="sticky top-0 z-50 h-16 border-b border-hairline bg-canvas/80 backdrop-blur-md">
+  <div class="mx-auto flex h-full max-w-[1400px] items-center justify-between px-6">
+    <a href="/" class="flex items-center gap-2">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="text-ink">
+        <path d="M3 8l9-5 9 5v8l-9 5-9-5V8z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M12 3v18M3 8l9 5 9-5" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+      </svg>
+      <span class="text-sm font-semibold tracking-tight text-ink">Cold Email Checker</span>
+    </a>
+
+    <div class="hidden items-center gap-1 md:flex">
+      <a href="#checker" class="rounded-full px-3 py-1.5 text-sm text-body transition-colors hover:text-ink">Checker</a>
+      <a href="#features" class="rounded-full px-3 py-1.5 text-sm text-body transition-colors hover:text-ink">Features</a>
+      <a href="#faq" class="rounded-full px-3 py-1.5 text-sm text-body transition-colors hover:text-ink">FAQ</a>
+    </div>
+
+    <div class="flex items-center gap-2">
+      <button id="theme-toggle" class="inline-flex h-8 w-8 items-center justify-center rounded-full border border-hairline text-body transition-colors hover:bg-canvas-soft-2 hover:text-ink" title="Toggle theme" aria-label="Toggle dark mode">
+        <svg id="icon-sun" class="hidden h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+        </svg>
+        <svg id="icon-moon" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+        </svg>
+      </button>
+      <a href="#checker" class="inline-flex h-8 items-center rounded-[100px] bg-primary px-3 text-sm font-medium text-on-primary transition-opacity hover:opacity-90">
+        Check Now
+      </a>
+    </div>
+  </div>
+</nav>
+
+
+<script>
+  const toggle = document.getElementById("theme-toggle")!;
+  const iconSun = document.getElementById("icon-sun")!;
+  const iconMoon = document.getElementById("icon-moon")!;
+
+  function applyTheme(dark: boolean) {
+    document.documentElement.classList.toggle("dark", dark);
+    iconSun.classList.toggle("hidden", !dark);
+    iconMoon.classList.toggle("hidden", dark);
+    localStorage.setItem("theme", dark ? "dark" : "light");
+  }
+
+  // Init from stored preference or system preference
+  const stored = localStorage.getItem("theme");
+  const prefersDark = stored ? stored === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
+  applyTheme(prefersDark);
+
+  toggle.addEventListener("click", () => {
+    applyTheme(!document.documentElement.classList.contains("dark"));
+  });
+</script>

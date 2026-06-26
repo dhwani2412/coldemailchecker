@@ -1,0 +1,391 @@
+---
+---
+
+<section id="checker" class="bg-canvas-soft py-24">
+  <div class="mx-auto max-w-[1400px] px-6">
+    <div class="text-center">
+      <span class="font-mono text-xs uppercase tracking-wide text-mute">Spam Scanner</span>
+      <h2 class="mt-3 text-3xl font-semibold tracking-[-1.28px] text-ink md:text-4xl">
+        Scan your email template.
+      </h2>
+      <p class="mt-3 text-base text-body">
+        Paste your subject line and email body below. We'll highlight every spam trigger word instantly.
+      </p>
+    </div>
+
+    <div class="mt-12 grid gap-8 lg:grid-cols-[1fr_380px]">
+      <!-- Editor Panel -->
+      <div class="space-y-4">
+        <!-- Subject Line -->
+        <div>
+          <label for="subject" class="mb-1.5 block font-mono text-xs text-mute">Subject Line</label>
+          <input
+            type="text"
+            id="subject"
+            placeholder="Enter your email subject line..."
+            class="h-10 w-full rounded-[6px] border border-hairline bg-canvas px-3 text-sm text-ink outline-none transition-colors placeholder:text-mute focus:border-hairline-strong"
+          />
+        </div>
+
+        <!-- Email Body -->
+        <div>
+          <label for="body" class="mb-1.5 block font-mono text-xs text-mute">Email Body</label>
+          <div class="editor-wrap relative">
+            <div
+              id="highlight-layer"
+              class="pointer-events-none absolute inset-0 overflow-auto whitespace-pre-wrap break-words rounded-[6px] border border-transparent p-[10px] font-sans text-sm leading-6 text-transparent"
+              aria-hidden="true"
+            ></div>
+            <textarea
+              id="body"
+              rows="12"
+              placeholder="Paste your email content here..."
+              class="relative w-full resize-y rounded-[6px] border border-hairline bg-transparent p-[10px] font-sans text-sm leading-6 text-ink outline-none transition-colors placeholder:text-mute focus:border-hairline-strong"
+            ></textarea>
+          </div>
+        </div>
+
+        <!-- Stats bar -->
+        <div class="flex flex-wrap items-center gap-4 text-xs text-mute">
+          <span id="word-count">0 words</span>
+          <span class="text-hairline">·</span>
+          <span id="read-time">0 min read</span>
+          <span class="text-hairline">·</span>
+          <span id="spam-count">0 spam words found</span>
+        </div>
+      </div>
+
+      <!-- Results Panel -->
+      <div class="space-y-4">
+        <!-- Score Card -->
+        <div class="rounded-[8px] border border-hairline bg-canvas p-6 shadow-[0px_1px_1px_#00000005,0px_2px_2px_#0000000a]">
+          <div class="flex items-center justify-between">
+            <span class="font-mono text-xs uppercase text-mute">Deliverability Score</span>
+            <button id="copy-btn" class="rounded-[6px] border border-hairline px-2 py-1 font-mono text-xs text-body transition-colors hover:bg-canvas-soft-2" title="Copy cleaned text">
+              Copy Text
+            </button>
+          </div>
+          <div class="mt-4 flex items-end gap-2">
+            <span id="score-value" class="text-5xl font-semibold tracking-[-2.4px] text-ink">100</span>
+            <span class="mb-1 text-sm text-mute">/100</span>
+          </div>
+          <div class="mt-3 h-2 overflow-hidden rounded-full bg-canvas-soft-2">
+            <div id="score-bar" class="h-full rounded-full bg-success transition-all duration-300" style="width: 100%"></div>
+          </div>
+          <p id="score-label" class="mt-2 text-xs text-mute">Your email looks clean — ready to send.</p>
+        </div>
+
+        <!-- Spam Words List -->
+        <div id="results-list" class="max-h-[400px] space-y-2 overflow-y-auto rounded-[8px] border border-hairline bg-canvas p-4 shadow-[0px_1px_1px_#00000005,0px_2px_2px_#0000000a]">
+          <p class="py-8 text-center text-sm text-mute">No spam words detected yet. Start typing or paste your email above.</p>
+        </div>
+
+        <!-- Tone & Personalization Analyzer -->
+        <div class="rounded-[8px] border border-hairline bg-canvas p-5 shadow-[0px_1px_1px_#00000005,0px_2px_2px_#0000000a]">
+          <span class="font-mono text-xs uppercase text-mute">Tone & Personalization</span>
+
+          <!-- Tone Analysis -->
+          <div class="mt-4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-medium text-body">Tone</span>
+              <span id="tone-label" class="font-mono text-xs text-mute">—</span>
+            </div>
+            <div class="mt-1.5 h-1.5 overflow-hidden rounded-full bg-canvas-soft-2">
+              <div id="tone-bar" class="h-full rounded-full bg-success transition-all duration-300" style="width:0%"></div>
+            </div>
+            <p id="tone-tip" class="mt-1 text-xs text-mute"></p>
+          </div>
+
+          <!-- Personalization Depth -->
+          <div class="mt-4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-medium text-body">Personalization</span>
+              <span id="perso-label" class="font-mono text-xs text-mute">—</span>
+            </div>
+            <div class="mt-1.5 h-1.5 overflow-hidden rounded-full bg-canvas-soft-2">
+              <div id="perso-bar" class="h-full rounded-full bg-success transition-all duration-300" style="width:0%"></div>
+            </div>
+            <div id="perso-tags" class="mt-1.5 flex flex-wrap gap-1"></div>
+          </div>
+
+          <!-- Reading Level -->
+          <div class="mt-4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-medium text-body">Reading Level</span>
+              <span id="read-level" class="font-mono text-xs text-mute">—</span>
+            </div>
+            <div class="mt-1.5 h-1.5 overflow-hidden rounded-full bg-canvas-soft-2">
+              <div id="read-bar" class="h-full rounded-full bg-success transition-all duration-300" style="width:0%"></div>
+            </div>
+            <p id="read-tip" class="mt-1 text-xs text-mute"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { scanText, calculateScore, spamWords } from "../lib/spam-words.js";
+
+  const subjectInput = document.getElementById("subject") as HTMLInputElement;
+  const bodyInput = document.getElementById("body") as HTMLTextAreaElement;
+  const highlightLayer = document.getElementById("highlight-layer") as HTMLDivElement;
+  const wordCountEl = document.getElementById("word-count")!;
+  const readTimeEl = document.getElementById("read-time")!;
+  const spamCountEl = document.getElementById("spam-count")!;
+  const scoreValueEl = document.getElementById("score-value")!;
+  const scoreBarEl = document.getElementById("score-bar")!;
+  const scoreLabelEl = document.getElementById("score-label")!;
+  const resultsListEl = document.getElementById("results-list")!;
+  const copyBtn = document.getElementById("copy-btn")!;
+
+  function analyze() {
+    const subject = subjectInput.value;
+    const body = bodyInput.value;
+    const fullText = (subject + " " + body).trim();
+
+    // Word count & read time
+    const words = fullText.split(/\s+/).filter(Boolean);
+    wordCountEl.textContent = `${words.length} word${words.length !== 1 ? "s" : ""}`;
+    readTimeEl.textContent = `${Math.max(1, Math.ceil(words.length / 200))} min read`;
+
+    // Scan
+    const subjectResults = scanText(subject);
+    const bodyResults = scanText(body);
+    const allResults = [...subjectResults, ...bodyResults];
+
+    // Subject line words count 2x
+    const weightedResults = [
+      ...subjectResults.map((r) => ({ ...r, severity: r.severity + 1 })),
+      ...bodyResults,
+    ];
+
+    spamCountEl.textContent = `${allResults.length} spam word${allResults.length !== 1 ? "s" : ""} found`;
+
+    // Score
+    const score = calculateScore(fullText, weightedResults);
+    scoreValueEl.textContent = String(score);
+    scoreBarEl.style.width = `${score}%`;
+
+    if (score >= 80) {
+      scoreBarEl.className = "h-full rounded-full bg-success transition-all duration-300";
+      scoreLabelEl.textContent = "Your email looks clean — ready to send.";
+    } else if (score >= 50) {
+      scoreBarEl.className = "h-full rounded-full bg-warning transition-all duration-300";
+      scoreLabelEl.textContent = "Some risky words found. Consider replacing them.";
+    } else {
+      scoreBarEl.className = "h-full rounded-full bg-error transition-all duration-300";
+      scoreLabelEl.textContent = "High spam risk. Replace highlighted words before sending.";
+    }
+
+    // Highlight layer for body
+    if (body) {
+      let html = "";
+      let lastIdx = 0;
+      for (const r of bodyResults) {
+        html += escapeHtml(body.slice(lastIdx, r.start));
+        html += `<mark style="background:${r.color}20;border-bottom:2px solid ${r.color};border-radius:2px">${escapeHtml(body.slice(r.start, r.end))}</mark>`;
+        lastIdx = r.end;
+      }
+      html += escapeHtml(body.slice(lastIdx));
+      highlightLayer.innerHTML = html;
+    } else {
+      highlightLayer.innerHTML = "";
+    }
+
+    // Results list
+    if (allResults.length === 0) {
+      resultsListEl.innerHTML = `<p class="py-8 text-center text-sm text-mute">No spam words detected yet. Start typing or paste your email above.</p>`;
+      analyzeTone(fullText);
+      return;
+    }
+
+    // Group by category
+    const grouped: Record<string, typeof allResults> = {};
+    for (const r of allResults) {
+      if (!grouped[r.category]) grouped[r.category] = [];
+      // Avoid duplicates in display
+      if (!grouped[r.category].find((x) => x.word === r.word)) {
+        grouped[r.category].push(r);
+      }
+    }
+
+    let html = "";
+    for (const [cat, items] of Object.entries(grouped)) {
+      const catData = spamWords[cat as keyof typeof spamWords];
+      html += `<div class="mb-3">
+        <div class="mb-1.5 flex items-center gap-2">
+          <span class="h-2 w-2 rounded-full" style="background:${catData.color}"></span>
+          <span class="font-mono text-xs uppercase text-mute">${catData.label}</span>
+        </div>`;
+      for (const item of items) {
+        const sevLabel = item.severity === 3 ? "High" : item.severity === 2 ? "Med" : "Low";
+        const sevColor = item.severity === 3 ? "#ee0000" : item.severity === 2 ? "#f5a623" : "#888888";
+        html += `<div class="flex items-center justify-between rounded-[6px] px-2 py-1.5 text-sm transition-colors hover:bg-canvas-soft-2">
+          <div class="flex items-center gap-2">
+            <span class="font-mono text-xs px-1 rounded" style="color:${sevColor}">${sevLabel}</span>
+            <span class="text-ink">"${escapeHtml(item.word)}"</span>
+          </div>
+          <span class="text-xs text-mute">→ ${escapeHtml(item.suggestion)}</span>
+        </div>`;
+      }
+      html += `</div>`;
+    }
+
+    resultsListEl.innerHTML = html;
+    analyzeTone(fullText);
+  }
+
+  function escapeHtml(str: string) {
+    return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
+
+  // Sync scroll between textarea and highlight layer
+  bodyInput.addEventListener("scroll", () => {
+    highlightLayer.scrollTop = bodyInput.scrollTop;
+    highlightLayer.scrollLeft = bodyInput.scrollLeft;
+  });
+
+  // --- Tone & Personalization Analyzer ---
+  const toneLabel = document.getElementById("tone-label")!;
+  const toneBar = document.getElementById("tone-bar")!;
+  const toneTip = document.getElementById("tone-tip")!;
+  const persoLabel = document.getElementById("perso-label")!;
+  const persoBar = document.getElementById("perso-bar")!;
+  const persoTags = document.getElementById("perso-tags")!;
+  const readLevel = document.getElementById("read-level")!;
+  const readBar = document.getElementById("read-bar")!;
+  const readTip = document.getElementById("read-tip")!;
+
+  const salesyWords = ["buy","purchase","offer","deal","guarantee","exclusive","limited","order","subscribe","promotional","sale","pricing","package","premium"];
+  const formalWords = ["hereby","furthermore","aforementioned","pursuant","whereas","notwithstanding","henceforth","therein","accordingly","shall","herewith","undersigned"];
+  const personalizationSignals = {
+    company: /\b(your company|your team|your org|at \w+|{{company}}|\[company\])\b/gi,
+    role: /\b(your role|as a \w+|{{role}}|{{title}}|\[role\]|CEO|CTO|VP|manager|director|founder)\b/gi,
+    painPoint: /\b(struggling with|challenge|pain point|problem|issue|frustrated|difficult|bottleneck|{{pain}}|\[pain\])\b/gi,
+  };
+
+  function analyzeTone(text: string) {
+    if (!text.trim()) {
+      toneLabel.textContent = "—";
+      toneBar.style.width = "0%";
+      toneTip.textContent = "";
+      persoLabel.textContent = "—";
+      persoBar.style.width = "0%";
+      persoTags.innerHTML = "";
+      readLevel.textContent = "—";
+      readBar.style.width = "0%";
+      readTip.textContent = "";
+      return;
+    }
+
+    const lower = text.toLowerCase();
+    const words = text.split(/\s+/).filter(Boolean);
+    const wordCount = words.length;
+
+    // Tone: count salesy vs formal markers
+    let salesyCount = 0, formalCount = 0;
+    for (const w of salesyWords) { const re = new RegExp("\\b" + w + "\\b", "gi"); salesyCount += (lower.match(re) || []).length; }
+    for (const w of formalWords) { const re = new RegExp("\\b" + w + "\\b", "gi"); formalCount += (lower.match(re) || []).length; }
+
+    const salesyRatio = wordCount > 0 ? salesyCount / wordCount : 0;
+    const formalRatio = wordCount > 0 ? formalCount / wordCount : 0;
+
+    let tone: string, tonePercent: number, toneColor: string, tip: string;
+    if (salesyRatio > 0.04) {
+      tone = "Too Salesy"; tonePercent = 30; toneColor = "bg-error"; tip = "Reduce promotional language. Focus on value, not selling.";
+    } else if (formalRatio > 0.02) {
+      tone = "Too Formal"; tonePercent = 50; toneColor = "bg-warning"; tip = "Loosen the language. Write like you're talking to a peer.";
+    } else {
+      tone = "Conversational"; tonePercent = 100; toneColor = "bg-success"; tip = "Great — your tone is natural and approachable.";
+    }
+    toneLabel.textContent = tone;
+    toneBar.style.width = `${tonePercent}%`;
+    toneBar.className = `h-full rounded-full ${toneColor} transition-all duration-300`;
+    toneTip.textContent = tip;
+
+    // Personalization depth
+    const found: string[] = [];
+    for (const [key, regex] of Object.entries(personalizationSignals)) {
+      regex.lastIndex = 0;
+      if (regex.test(text)) found.push(key);
+    }
+    const persoPercent = Math.round((found.length / 3) * 100);
+    const persoText = found.length === 3 ? "Strong" : found.length >= 1 ? "Moderate" : "Weak";
+    const persoColor = found.length === 3 ? "bg-success" : found.length >= 1 ? "bg-warning" : "bg-error";
+    persoLabel.textContent = persoText;
+    persoBar.style.width = `${persoPercent}%`;
+    persoBar.className = `h-full rounded-full ${persoColor} transition-all duration-300`;
+    persoTags.innerHTML = ["company", "role", "painPoint"].map(k => {
+      const active = found.includes(k);
+      return `<span class="rounded-full px-2 py-0.5 text-[10px] font-mono ${active ? "bg-success/15 text-success" : "bg-canvas-soft-2 text-mute"}">${k === "painPoint" ? "pain point" : k}</span>`;
+    }).join("");
+
+    // Reading Level (Flesch-Kincaid approx)
+    const sentences = text.split(/[.!?]+/).filter(s => s.trim().length > 0);
+    const sentenceCount = Math.max(sentences.length, 1);
+    const syllableCount = words.reduce((sum, w) => sum + countSyllables(w), 0);
+    const avgWordsPerSentence = wordCount / sentenceCount;
+    const avgSyllablesPerWord = syllableCount / Math.max(wordCount, 1);
+    const fkGrade = 0.39 * avgWordsPerSentence + 11.8 * avgSyllablesPerWord - 15.59;
+    const grade = Math.max(1, Math.min(18, Math.round(fkGrade)));
+
+    let levelText: string, levelPercent: number, levelColor: string, levelTip: string;
+    if (grade <= 8) {
+      levelText = `Grade ${grade} — Easy`; levelPercent = 100; levelColor = "bg-success"; levelTip = "Perfect for cold emails. Clear and scannable.";
+    } else if (grade <= 12) {
+      levelText = `Grade ${grade} — Moderate`; levelPercent = 60; levelColor = "bg-warning"; levelTip = "Slightly complex. Try shorter sentences.";
+    } else {
+      levelText = `Grade ${grade} — Complex`; levelPercent = 25; levelColor = "bg-error"; levelTip = "Too dense for cold outreach. Simplify heavily.";
+    }
+    readLevel.textContent = levelText;
+    readBar.style.width = `${levelPercent}%`;
+    readBar.className = `h-full rounded-full ${levelColor} transition-all duration-300`;
+    readTip.textContent = levelTip;
+  }
+
+  function countSyllables(word: string): number {
+    word = word.toLowerCase().replace(/[^a-z]/g, "");
+    if (word.length <= 3) return 1;
+    word = word.replace(/(?:[^laeiouy]es|ed|[^laeiouy]e)$/, "");
+    word = word.replace(/^y/, "");
+    const m = word.match(/[aeiouy]{1,2}/g);
+    return m ? m.length : 1;
+  }
+
+  // Real-time analysis
+  subjectInput.addEventListener("input", analyze);
+  bodyInput.addEventListener("input", analyze);
+
+  // Copy button
+  copyBtn.addEventListener("click", () => {
+    const text = `Subject: ${subjectInput.value}\n\n${bodyInput.value}`;
+    navigator.clipboard.writeText(text).then(() => {
+      copyBtn.textContent = "Copied!";
+      setTimeout(() => { copyBtn.textContent = "Copy Text"; }, 1500);
+    });
+  });
+</script>
+
+<style>
+  .editor-wrap {
+    background: var(--color-canvas);
+    border-radius: 6px;
+  }
+  #highlight-layer,
+  #body {
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    line-height: 1.5rem;
+    padding: 10px;
+    word-wrap: break-word;
+    word-break: normal;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
+  }
+  #highlight-layer mark {
+    line-height: inherit;
+    padding: 2px 0;
+  }
+</style>

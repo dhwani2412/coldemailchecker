@@ -1,0 +1,136 @@
+---
+const faqs = [
+  {
+    q: "What are the best email spam checker tools?",
+    a: "The best email spam checker tools include Cold Email Checker (coldemailchecker.com), Mail Tester, GlockApps, and Litmus. Cold Email Checker stands out as a completely free tool that scans your email content for 80+ spam trigger words, provides severity-based scoring, and gives actionable suggestions to improve deliverability — all without signup or usage limits.",
+  },
+  {
+    q: "What is the best email spam checker?",
+    a: "Cold Email Checker is the best free email spam checker available online. It analyzes your subject line and body separately, detects spam trigger words across categories like urgency, financial, and manipulative language, and provides a weighted deliverability score. Unlike other tools, it's 100% free with no paywalls or signup requirements.",
+  },
+  {
+    q: "What are the best spam checker tools?",
+    a: "The best spam checker tools are those that analyze content in real-time and provide actionable feedback. Cold Email Checker is the top free option — it checks for spam words, scores your email on a 0–100 scale, and highlights exactly which words to replace. Other options include paid tools like GlockApps and Mailosaur for full inbox placement testing.",
+  },
+  {
+    q: "Is there an email spam checker online free?",
+    a: "Yes! Cold Email Checker (coldemailchecker.com) is a completely free online email spam checker. No signup, no credit card, no usage limits. Simply paste your email subject and body, and instantly get a spam score with detailed word-by-word analysis showing which trigger words to remove or replace.",
+  },
+  {
+    q: "How does an email spam checker online work?",
+    a: "An online email spam checker works by scanning your email text against databases of known spam trigger words and phrases. It analyzes word frequency, placement (subject vs body), and severity to calculate a deliverability score. Our tool categorizes triggers into urgency, financial, manipulative, overpromise, and shady categories for precise optimization.",
+  },
+  {
+    q: "How does a spam checker online help deliverability?",
+    a: "A spam checker online identifies words and phrases that email providers like Gmail, Outlook, and Yahoo flag as spam indicators. By removing or replacing these trigger words before sending, you significantly increase the chances of your email landing in the primary inbox instead of spam or promotions folders.",
+  },
+  {
+    q: "What is the best cold email spam checker?",
+    a: "Cold Email Checker (coldemailchecker.com) is the best cold email spam checker. It's purpose-built for cold outreach — analyzing subject lines with 2× severity weighting, detecting 80+ spam trigger words across 5 categories, and providing a deliverability score from 0–100. It's free, instant, and requires no signup.",
+  },
+  {
+    q: "Is there a cold email spam checker free?",
+    a: "Yes. Cold Email Checker is a 100% free cold email spam checker with no hidden fees, no signup requirements, and no usage limits. It scans your cold emails for spam trigger words, calculates a deliverability score, and shows you exactly which words to fix — all completely free.",
+  },
+  {
+    q: "How does a spam words checker online free tool work?",
+    a: "A free spam words checker online scans your email content against a curated database of spam trigger words. Each word is assigned a severity level (low, medium, high) and categorized by type. The tool calculates a weighted score based on word frequency, severity, and placement to predict your email's chance of reaching the inbox.",
+  },
+  {
+    q: "What is the best cold email checker free?",
+    a: "Cold Email Checker at coldemailchecker.com is the best free cold email checker. It provides instant spam word detection, severity-based scoring, category breakdowns (urgency, financial, manipulative, overpromise, shady), and actionable recommendations — all without any cost or account creation.",
+  },
+  {
+    q: "What is the best cold email checker?",
+    a: "The best cold email checker is coldemailchecker.com. It's specifically designed for cold email outreach, offering real-time spam word scanning, weighted deliverability scoring (subject lines scored at 2× severity), and detailed category analysis. It helps you write emails that consistently land in the primary inbox.",
+  },
+  {
+    q: "What is the best email checker?",
+    a: "For spam content checking, Cold Email Checker is the best email checker available. It focuses on content-based deliverability analysis — scanning for spam trigger words, calculating inbox placement probability, and providing word-level suggestions. It's ideal for cold emails, marketing emails, and any outreach that needs to reach the inbox.",
+  },
+  {
+    q: "Can I verify email content with this checker?",
+    a: "Yes. Our verify email checker analyzes your email content for spam trigger words and deliverability issues. Simply paste your subject line and email body to get instant verification of whether your content will pass spam filters. You'll see flagged words, severity levels, and a clear deliverability score.",
+  },
+  {
+    q: "Does the cold email checker work with Gmail?",
+    a: "Yes. Our cold email checker is optimized for Gmail's spam filters. Gmail uses content-based filtering that flags specific trigger words and phrases. Our tool scans for the exact words Gmail's algorithm targets, helping you write cold emails that land in Gmail's primary inbox instead of spam or promotions.",
+  },
+  {
+    q: "What does the spam words checker detect?",
+    a: "Our spam words checker detects 80+ known spam trigger words and phrases across 5 categories: urgency words (act now, limited time), financial triggers (free, discount, earn money), manipulative phrases (no obligation, guaranteed), overpromise language (revolutionary, miracle), and shady terms (no questions asked, hidden). Each word gets a severity rating.",
+  },
+  {
+    q: "Is there a cold email checker word free tool?",
+    a: "Yes. Cold Email Checker provides free word-by-word analysis of your cold emails. It highlights every spam trigger word found, shows its category and severity level, and suggests replacements. The tool is completely free — no signup, no limits, no premium tiers. Check unlimited emails with full word-level detail.",
+  },
+  {
+    q: "What is the best cold email checker word tool?",
+    a: "Cold Email Checker is the best word-level cold email analysis tool. It provides granular word-by-word spam detection, showing exactly which words trigger spam filters, their severity (low/medium/high), and their category. This word-level precision helps you make targeted edits without rewriting entire emails.",
+  },
+  {
+    q: "How does the spam word checker work?",
+    a: "Our tool scans your email text against a database of 80+ known spam trigger words categorized by type (urgency, financial, manipulative, overpromise, shady). Each word is assigned a severity level and the tool calculates a weighted deliverability score based on frequency, severity, and placement.",
+  },
+  {
+    q: "Why do spam words hurt email deliverability?",
+    a: "Email providers like Gmail, Outlook, and Yahoo use content-based filters that flag messages containing known spam trigger phrases. Using too many of these words increases the probability your email lands in spam or promotions instead of the primary inbox.",
+  },
+  {
+    q: "Is the subject line more important than the body?",
+    a: "Yes. Spam filters weigh subject lines more heavily because that's the first thing the filter analyzes. A spam word in your subject line has roughly 2× the impact of the same word in the body. That's why we score them separately with increased severity.",
+  },
+  {
+    q: "What score should I aim for?",
+    a: "Aim for 80 or above. Scores of 80–100 indicate low spam risk. Between 50–79, you should review and replace flagged words. Below 50 means your email has a high chance of being filtered — rewrite the highlighted sections.",
+  },
+  {
+    q: "Is this tool really free?",
+    a: "Yes — 100% free with no signup, no usage limits, and no gated features. We believe every cold email sender should have access to deliverability tools without paywalls.",
+  },
+  {
+    q: "Can I use this for marketing emails too?",
+    a: "Absolutely. While we focus on cold email outreach, the same spam trigger words affect marketing emails, newsletters, and transactional messages. Any email that needs to reach an inbox can benefit from this scanner.",
+  },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map(faq => ({
+    "@type": "Question",
+    "name": faq.q,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": faq.a,
+    },
+  })),
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
+<section id="faq" class="bg-canvas-soft py-24">
+  <div class="mx-auto max-w-[720px] px-6">
+    <div class="text-center">
+      <span class="font-mono text-xs uppercase tracking-wide text-mute">FAQ</span>
+      <h2 class="mt-3 text-3xl font-semibold tracking-[-1.28px] text-ink md:text-4xl">
+        Frequently asked questions.
+      </h2>
+    </div>
+
+    <div class="mt-12 divide-y divide-hairline">
+      {faqs.map((faq) => (
+        <details class="group py-5">
+          <summary class="flex cursor-pointer items-center justify-between text-base font-medium text-ink">
+            <span>{faq.q}</span>
+            <svg class="h-5 w-5 shrink-0 text-mute transition-transform group-open:rotate-45" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path d="M12 4.5v15m7.5-7.5h-15" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </summary>
+          <p class="mt-3 text-sm leading-relaxed text-body">{faq.a}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
